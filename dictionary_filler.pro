@@ -38,7 +38,8 @@ SOURCES += \
     WordsFinder/WordsFinder1/wordsfinder1.cpp \
     AppController.cpp \
     WordsFinder/cfindererrortype.cpp \
-    WordsFinder/WordsFinder1/findwords1worker.cpp
+    WordsFinder/WordsFinder1/findwords1worker.cpp \
+    CBasicErrorType.cpp
 
 HEADERS += \
         mainwindow.h \

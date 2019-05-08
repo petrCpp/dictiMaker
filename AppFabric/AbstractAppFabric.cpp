@@ -4,3 +4,7 @@
 {
 
 }*/
+AbstractAppFabric::~AbstractAppFabric()
+{
+
+}

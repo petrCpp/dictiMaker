@@ -11,6 +11,11 @@
 class FindWords1Worker : public QObject
 {
     Q_OBJECT
+public:
+    ~FindWords1Worker() override
+    {
+        ;
+    }
 public slots:
     void startScanFile(const QString filename);
     void terminate();

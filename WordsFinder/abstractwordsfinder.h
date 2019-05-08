@@ -12,6 +12,7 @@ public:
     //virtual void setDocumentPath(const QString &fileName) = 0;
     virtual bool startFindWords(const QString &fileName/*, CBasicErrorType &err*/) = 0;
     virtual const QMap<QString, uint16_t> &getFoundWords() = 0;
+    virtual ~AbstractWordsFinder() = 0;
 };
 
 #endif // ABSTRACTWORDSFINDER_H

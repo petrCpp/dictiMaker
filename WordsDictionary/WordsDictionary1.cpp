@@ -7,6 +7,7 @@ WordsDictionary1::WordsDictionary1()
 
 }
 
+
 void WordsDictionary1::setSource(const QString &path)
 {
     mPath = path;
@@ -24,7 +25,7 @@ bool WordsDictionary1::openSource()
 
 bool WordsDictionary1::loadData()
 {
-    ?????????????
+    //?????????????
     return false;
 }
 
@@ -74,7 +75,7 @@ QMap<QString, QList<ESpeechPart>> WordsDictionary1::words()
 
 void WordsDictionary1::setWords(const QMap<QString, QList<ESpeechPart> > &words)
 {
-
+    Q_UNUSED(words);
 }
 
 QJsonValue  WordsDictionary1::speachPartToJsonValue(ESpeechPart speachPart)

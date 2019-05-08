@@ -4,3 +4,8 @@
 //{
 
 //}
+
+AbstractWordsFinder::~AbstractWordsFinder()
+{
+
+}

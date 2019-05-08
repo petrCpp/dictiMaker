@@ -7,7 +7,10 @@ class CFinderErrorType : public CBasicErrorType
 {
 public:
     CFinderErrorType();
+    ~CFinderErrorType() override
+    {
 
+    }
 };
 
 #endif // CFINDERERRORTYPE_H
