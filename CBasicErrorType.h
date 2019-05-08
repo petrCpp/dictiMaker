@@ -12,6 +12,9 @@ public:
                                             // сгенерировал ошибку
     virtual QString errorDescription() const { return "";}
     virtual QString errorResolve() const { return "";}
+    virtual ~CBasicErrorType() = 0;
 };
 
 #endif // CBASIC_ERROR_TYPE_H
+
+

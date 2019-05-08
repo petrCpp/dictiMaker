@@ -14,6 +14,7 @@ public:
     virtual std::unique_ptr<GuiInterface>&& createGui() = 0;
     virtual std::unique_ptr<AbstractWordsDictionary>&& createDictionary() = 0;
     virtual std::unique_ptr<AbstractWordsFinder>&& createWordsFinder() = 0;
+    virtual  ~AbstractAppFabric() = 0;
 };
 
 #endif // ABSTRACTAPPFABRIC_H

@@ -37,6 +37,7 @@ public:
     virtual void closeSource() = 0;
     virtual QMap<QString, QList<ESpeechPart>> words() = 0;
     virtual void setWords(const QMap<QString, QList<ESpeechPart>> &words) = 0;
+    virtual ~AbstractWordsDictionary() = 0;
 };
 
 #endif // ABSTRACTWORDSDICTIONARY_H

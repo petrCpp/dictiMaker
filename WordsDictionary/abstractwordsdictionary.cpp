@@ -1,6 +1,6 @@
 #include "abstractwordsdictionary.h"
 
-//AbstractWordsDictionary::AbstractWordsDictionary()
-//{
+AbstractWordsDictionary::~AbstractWordsDictionary()
+{
 
-//}
+}

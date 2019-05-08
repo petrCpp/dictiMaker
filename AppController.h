@@ -16,6 +16,10 @@ class AppController : public QObject, public GuiCommandsInterface,
     Q_OBJECT
 public:
     explicit AppController(EOsType osType, QObject *parent = nullptr);
+    ~AppController() override
+    {
+        ;
+    }
     std::unique_ptr<AbstractAppFabric> &&selectOs(EOsType osType);
 
     // GuiCommandsInterface implementation

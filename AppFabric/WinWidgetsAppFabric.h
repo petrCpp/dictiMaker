@@ -11,7 +11,10 @@ public:
     std::unique_ptr<GuiInterface>&& createGui() override;
     std::unique_ptr<AbstractWordsDictionary>&& createDictionary() override;
     std::unique_ptr<AbstractWordsFinder>&& createWordsFinder() override;
+    ~WinWidgetsAppFabric() override
+    {
 
+    }
 private:
     std::unique_ptr<GuiInterface> mGui;
     std::unique_ptr<AbstractWordsDictionary> mDict;

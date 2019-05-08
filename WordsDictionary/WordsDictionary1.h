@@ -12,6 +12,10 @@ class WordsDictionary1 : public AbstractWordsDictionary
 {
 public:
     WordsDictionary1();
+    ~WordsDictionary1() override
+    {
+        ;
+    }
     void setSource(const QString &path) override;
     void setPasword(const QString &password) override;
     bool openSource() override;

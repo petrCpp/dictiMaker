@@ -10,6 +10,10 @@ class WordsDictionaryModel : public QStandardItemModel
     Q_OBJECT
 public:
     WordsDictionaryModel(QObject *parent = nullptr);
+    ~WordsDictionaryModel() override
+    {
+        ;
+    }
     void addDict(const QMap<QString, uint16_t> &dict);
 
 
