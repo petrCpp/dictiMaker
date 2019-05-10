@@ -19,7 +19,8 @@ enum class ESpeechPart: uint8_t
     particle,
     interjection,
     nonWord,        // is not word
-    foreignWord
+    foreignWord,
+    unknown
 };
 
 
@@ -28,7 +29,11 @@ class AbstractWordsDictionary
 public:
     //AbstractWordsDictionary();
     virtual void setSource(const QString &path) = 0;
+    virtual void setDictLanguage(const QString &lang) = 0;
+    virtual void setDictName(const QString &dictrName) = 0;
     virtual void setPasword(const QString &password) = 0;
+    virtual QString getDictLanguage() = 0;
+    virtual QString getDictName() = 0;
     virtual bool openSource() = 0;
     virtual bool loadData() = 0;
     virtual void appendWords(const QStringList &words) = 0;

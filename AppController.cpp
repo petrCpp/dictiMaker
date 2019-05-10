@@ -3,7 +3,8 @@
 
 AppController::AppController(EOsType osType, QObject *parent) :
         QObject(parent),
-        mModel(new WordsDictionaryModel(this))
+        mModel(new WordsDictionaryModel(this)),
+        appInfo(new CApplicationInfo)
 {
     // Создаем подходящую фабрику для создания компонентов приложения
     std::unique_ptr<AbstractAppFabric> appFabric = selectOs(osType);
@@ -14,9 +15,14 @@ AppController::AppController(EOsType osType, QObject *parent) :
     // Связываем компоненты друг с другом
     mGui->setGuiCommandsInterface(this);
     mGui->setDictionaryModel(mModel);
-
     mWordsFinder->setWordsFinderEvents(this);
+    mGui->renderTotalWordsCount(mWordsDict->words().size());
 
+
+    mGui->setAppDescription(appInfo->getAppDescription());
+    mGui->setAppVersion(appInfo->getAppVersion());
+    mGui->setContacts(appInfo->getContacts());
+    mGui->setMyPhoto(appInfo->getmyPhoto());
 }
 
 
@@ -43,16 +49,34 @@ void AppController::openTextFileToFindWords(const QString &fileName)
     //}
 }
 
+void AppController::setDictSource(const QString &source)
+{
+    mWordsDict->setSource(source);
+}
+
 
 void AppController::saveDictionary(EWordDictSource source)
 {
-
+    if(source == EWordDictSource::file)
+    {
+        mWordsDict->setDictName(mGui->getDictName());
+        mWordsDict->setDictLanguage(mGui->getLanguage());
+        mWordsDict->saveData();
+    }
 }
 
 
 void AppController::loadDictionary(EWordDictSource source)
 {
-
+    if(source == EWordDictSource::file)
+    {
+        mWordsDict->loadData();
+        mGui->renderDictName(mWordsDict->getDictName());
+        mGui->renderLanguage(mWordsDict->getDictLanguage());
+        mGui->renderTotalWordsCount(mWordsDict->words().size());
+        mModel->clear();
+        mModel->addDict(mWordsDict->words());
+    }
 }
 
 
@@ -73,6 +97,8 @@ void AppController::completed(EWordsFinderResult result)
 {
     if(result == EWordsFinderResult::succes)
     {
-        mModel->addDict(mWordsFinder->getFoundWords());
+        mWordsDict->appendWords(mWordsFinder->getFoundWords());
+        mModel->addDict(mWordsDict->words());
     }
+    mGui->renderTotalWordsCount(mWordsDict->words().size());
 }

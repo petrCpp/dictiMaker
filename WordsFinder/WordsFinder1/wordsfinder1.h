@@ -17,7 +17,7 @@ public:
     void setWordsFinderEvents(WordsFinderEventsInterface *events) override;
     //void setDocumentPath(const QString &fileName) override;
     bool startFindWords(const QString &fileName) override;
-    const QMap<QString, uint16_t> &getFoundWords() override;
+    QStringList getFoundWords() override;
 protected slots:
     void handleResults(QMap<QString, uint16_t> result);
     void onPercenteges(float perc);

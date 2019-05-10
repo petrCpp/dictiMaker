@@ -1,14 +1,15 @@
 #include "WordsDictionaryModel.h"
 
+
 WordsDictionaryModel::WordsDictionaryModel(QObject *parent):
         QStandardItemModel(parent)
 {
 
 }
 
-void WordsDictionaryModel::addDict(const QMap<QString, uint16_t> &dict)
+void WordsDictionaryModel::addDict(const QMap<QString, QList<ESpeechPart>> &dict)
 {
-    QMap<QString, uint16_t>::const_iterator it;
+    QMap<QString, QList<ESpeechPart>>::const_iterator it;
     for(it = dict.begin(); it != dict.end(); ++it)
     {
         if(!mDict.contains(it.key()))

@@ -17,7 +17,11 @@ public:
         ;
     }
     void setSource(const QString &path) override;
+    void setDictLanguage(const QString &lang) override;
+    void setDictName(const QString &dictrName) override;
     void setPasword(const QString &password) override;
+    QString getDictLanguage() override;
+    QString getDictName() override;
     bool openSource() override;
     bool loadData() override;
     void appendWords(const QStringList &words) override;
@@ -27,9 +31,9 @@ public:
     QMap<QString, QList<ESpeechPart>> words() override;
     void setWords(const QMap<QString, QList<ESpeechPart>> &words) override;
 protected:
-    const QString mFileFormatVersion = "1434Faad12487331";
-    const QString mDictName;
-    const QString mDictLanguage;
+    QString mFileFormatVersion = "1434Faad12487331";
+    QString mDictName;
+    QString mDictLanguage;
     QMap<QString, QList<ESpeechPart>> mWords;
     QMap<ESpeechPart, QMap<QString,  QJsonObject>> mWordsBySpeachParts;
     QString mPath;
@@ -39,6 +43,10 @@ protected:
                                          const QString &fileFormatVersion,
                                          const QMap<QString, QList<ESpeechPart>> &mWords);
     static QJsonValue speachPartToJsonValue(ESpeechPart speachPart);
+private:
+    static QString objValueToString(const QJsonObject &obj, const QString &key);
+    static ESpeechPart jsonValueToSpeachPart(const QJsonValue &val);
+    static void getDictFromJSonDocument(const QJsonDocument &doc, QString &dictName, QString &dictLanguage, QString &fileFormatVersion, QMap<QString, QList<ESpeechPart> > &words);
 };
 
 #endif // WORDSDICTIONARY1_H

@@ -48,9 +48,15 @@ WordsFinder1::~WordsFinder1()
 }
 
 
-const QMap<QString, uint16_t>& WordsFinder1::getFoundWords()
+QStringList WordsFinder1::getFoundWords()
 {
-    return mDict;
+    QStringList list;
+    QMap<QString, uint16_t>::iterator it;
+    for(it=mDict.begin(); it!=mDict.end(); ++it)
+    {
+        list.append(it.key());
+    }
+    return list;
 }
 
 void WordsFinder1::handleResults(QMap<QString, uint16_t> result)

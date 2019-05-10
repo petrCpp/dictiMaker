@@ -4,6 +4,7 @@
 #include <QStandardItemModel>
 #include <QMap>
 #include <QString>
+#include <WordsDictionary/abstractwordsdictionary.h>
 
 class WordsDictionaryModel : public QStandardItemModel
 {
@@ -14,7 +15,7 @@ public:
     {
         ;
     }
-    void addDict(const QMap<QString, uint16_t> &dict);
+    void addDict(const QMap<QString, QList<ESpeechPart> > &dict);
 
 
 protected:

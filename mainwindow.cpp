@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <QFileDialog>
+#include <Gui/GuiInterface/guicommandsinterface.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,7 +17,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionOpen_text_file_for_find_new_words,
             SIGNAL(triggered(bool)), this, SLOT(onOpenTextFile()),
             Qt::DirectConnection);
+    connect(ui->actionSave_dictionary_file, &QAction::triggered,
+            this, &MainWindow::onSaveDictFile, Qt::DirectConnection);
 
+    connect(ui->actionOpen_dictionary_from_file, &QAction::triggered,
+            this, &MainWindow::onLoadDictFromFile, Qt::DirectConnection);
+
+    connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::onAbout,
+            Qt::DirectConnection);
 
 
 }
@@ -40,6 +48,51 @@ void MainWindow::onOpenTextFile()
     }
 }
 
+void MainWindow::onSaveDictFile()
+{
+    if(mCmdInterf!= nullptr)
+    {
+        QString fileName = QFileDialog::getSaveFileName(this,
+                tr("Выберите файл словаря"), "", tr("Файл словаря (*.dct)"));
+
+        //QString fileName = "C:/Users/Petr/Desktop/текст.txt";
+        // Если файл не выбран, выходим
+        if (fileName.isEmpty()) return;
+        mCmdInterf->setDictSource(fileName);
+        mCmdInterf->saveDictionary(EWordDictSource::file);
+    }
+}
+
+void MainWindow::onLoadDictFromFile()
+{
+    if(mCmdInterf!= nullptr)
+    {
+        QString fileName = QFileDialog::getOpenFileName(this,
+                tr("Выберите файл настроек"), "", tr("Файл словаря (*.dct)"));
+
+        //QString fileName = "C:/Users/Petr/Desktop/текст.txt";
+        // Если файл не выбран, выходим
+        if (fileName.isEmpty()) return;
+        mCmdInterf->setDictSource(fileName);
+        mCmdInterf->loadDictionary(EWordDictSource::file);
+    }
+}
+
+void MainWindow::onAbout()
+{
+    if(mAbout == nullptr)
+    {
+        mAbout.reset(new AboutWindow);
+        mAbout->setAppDescription(mDescr);
+        mAbout->setAppVersion(mVersion);
+        mAbout->setContacts(mContacts);
+        mAbout->setMyPhoto(mMyPhoto);
+    }
+    mAbout->show();
+
+
+}
+
 void MainWindow::setGuiCommandsInterface(GuiCommandsInterface *cmdInterf)
 {
     mCmdInterf = cmdInterf;
@@ -52,7 +105,7 @@ void MainWindow::setDictionaryModel(QAbstractItemModel *model)
 
 void MainWindow::renderTotalWordsCount(int totalWordsCount)
 {
-
+    ui->dictWordsNumberLbl->setText(QString::number(totalWordsCount));
 }
 
 void MainWindow::renderNewFoundWordsCount(int newWordsCount)
@@ -80,7 +133,33 @@ void MainWindow::redrawPercentage(float perc)
     }
 }
 
+void MainWindow::setMyPhoto(const QPixmap &photo)
+{
+    mMyPhoto = photo;
+}
+
+
 void MainWindow::renderTotalWords(const QStringList &words)
 {
+    Q_UNUSED(words);
+}
 
+void MainWindow::renderLanguage(const QString &lang)
+{
+    ui->languageEdt->setText(lang);
+}
+
+void MainWindow::renderDictName(const QString &dictName)
+{
+    ui->dictNameEdt->setText(dictName);
+}
+
+QString MainWindow::getLanguage()
+{
+    return ui->languageEdt->text();
+}
+
+QString MainWindow::getDictName()
+{
+    return ui->dictNameEdt->text();
 }

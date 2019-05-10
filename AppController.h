@@ -9,6 +9,7 @@
 #include <WordsFinder/abstractwordsfinder.h>
 #include <WordsDictionaryModel/WordsDictionaryModel.h>
 #include <memory>
+#include <AppInfo/capplicationinfo.h>
 
 class AppController : public QObject, public GuiCommandsInterface,
                         public WordsFinderEventsInterface
@@ -24,6 +25,7 @@ public:
 
     // GuiCommandsInterface implementation
     void openTextFileToFindWords(const QString & fileName) override;
+    void setDictSource(const QString &source) override;
     void saveDictionary(EWordDictSource source) override;
     void loadDictionary(EWordDictSource source) override;
     void closeApp() override;
@@ -43,6 +45,7 @@ private:
     std::unique_ptr<AbstractWordsFinder> mWordsFinder;
     WordsDictionaryModel *mModel;
     std::unique_ptr<AbstractAppFabric> mFabric;
+    CApplicationInfo *appInfo;
 };
 
 #endif // APP_CONTROLLER_H
