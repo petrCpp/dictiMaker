@@ -26,6 +26,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::onAbout,
             Qt::DirectConnection);
 
+    connect(ui->actionexit, &QAction::triggered, this, [this]()
+    {
+        mCmdInterf->closeApp();
+
+    }, Qt::DirectConnection);
 
 }
 
@@ -110,7 +115,7 @@ void MainWindow::renderTotalWordsCount(int totalWordsCount)
 
 void MainWindow::renderNewFoundWordsCount(int newWordsCount)
 {
-
+    Q_UNUSED(newWordsCount);
 }
 
 void MainWindow::showErrorMessage(const CBasicErrorType &err)

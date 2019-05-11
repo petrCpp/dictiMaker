@@ -10,14 +10,14 @@ AboutWindow::AboutWindow(QWidget *parent) :
 
 void AboutWindow::setAppDescription(const QString &descr)
 {
-    mDescr = descr;
-    ui->descriptionEdt->setText(mDescr + "\n" + mVersion);
+    //mDescr = descr;
+    ui->descriptionEdt->setText(descr);
 }
 
 void AboutWindow::setAppVersion(const QString &version)
 {
-    mVersion = version;
-    ui->descriptionEdt->setText(mDescr + "\n" + mVersion);
+    //mVersion = version;
+    ui->progVersionLbl->setText(version);
 }
 
 void AboutWindow::setContacts(const QString &contacts)

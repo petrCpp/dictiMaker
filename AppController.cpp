@@ -1,4 +1,5 @@
 #include "AppController.h"
+#include <QApplication>
 #include <AppFabric/WinWidgetsAppFabric.h>
 
 AppController::AppController(EOsType osType, QObject *parent) :
@@ -82,7 +83,7 @@ void AppController::loadDictionary(EWordDictSource source)
 
 void AppController::closeApp()
 {
-
+    QApplication::exit(0);
 }
 
 

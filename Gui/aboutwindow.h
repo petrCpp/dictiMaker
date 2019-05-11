@@ -23,8 +23,8 @@ signals:
 public slots:
 
 private:
-    QString mDescr;
-    QString mVersion;
+    //QString mDescr;
+    //QString mVersion;
     Ui::AboutWindow *ui;
 
 };

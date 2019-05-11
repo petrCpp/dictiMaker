@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-#VERSION 1.0.0
+VERSION = 1.0.1
 
 QT       += core gui
 
@@ -19,7 +19,7 @@ TEMPLATE = app
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-#DEFINES += APP_VERS = "${VERSION}"
+DEFINES += PROGRAM_VERSION=\\\"$${VERSION}\\\"
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.

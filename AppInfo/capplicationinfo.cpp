@@ -17,7 +17,7 @@ QString CApplicationInfo::getAppDescription()
 
 QString CApplicationInfo::getAppVersion()
 {
-    return ""; // APP_VERS;
+    return PROGRAM_VERSION;
 }
 
 QString CApplicationInfo::getContacts()

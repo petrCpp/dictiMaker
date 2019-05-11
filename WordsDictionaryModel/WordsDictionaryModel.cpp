@@ -25,14 +25,21 @@ void WordsDictionaryModel::addDict(const QMap<QString, QList<ESpeechPart>> &dict
 void WordsDictionaryModel::buildModel()
 {
     QMap<QString, uint16_t>::const_iterator it;
+    this->blockSignals(true); // To accelerating redraw views
     this->clear();
     this->setColumnCount(2);
     this->setRowCount(mDict.size());
     int i = 0;
+    QString lastKey = mDict.lastKey();
     for(it = mDict.begin(); it != mDict.end(); ++it)
     {
+        if(it.key() == lastKey)
+        {
+            this->blockSignals(false);
+        }
         QStandardItem *item = new QStandardItem(it.key());
         this->setItem(i, 0, item);
         i++;
     }
+    this->blockSignals(false);
 }
