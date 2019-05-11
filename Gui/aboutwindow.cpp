@@ -17,7 +17,8 @@ void AboutWindow::setAppDescription(const QString &descr)
 void AboutWindow::setAppVersion(const QString &version)
 {
     //mVersion = version;
-    ui->progVersionLbl->setText(version);
+
+    ui->progVersionLbl->setText(QString("<b>%1</b> <i></i>").arg(version));
 }
 
 void AboutWindow::setContacts(const QString &contacts)

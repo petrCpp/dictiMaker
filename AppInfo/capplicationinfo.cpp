@@ -7,40 +7,48 @@ CApplicationInfo::CApplicationInfo(QObject *parent) : QObject(parent)
 
 QString CApplicationInfo::getAppDescription()
 {
+    const QString itemsFont = "<font size=\"3\" color=#0B890B>";
+    const QString notImplementedFont = "<font size=\"3\" color=#740808>";
     return tr(
-    {"This application was especially created for demonstration "
+    {"<p><font size=\"3\" color=#1D1B51>"
+     "This application was especially created for demonstration "
      "my skills in the programming art. It intended to "
      "automatically create a dictionary and write it to a special "
      "file with the dct extension in JSON format. "
-     "The application also allows you to write a dictionary to the database. \n\n"
-     "In particular this example project show possession of such "
-     "skills as:\n"
-     "-Modern c++,\n"
-     "-Multithreading,\n"
-     "-Design patterns,\n"
-     "-Basic algoritms & Data structures,\n"
-     "-Smart pointers,\n"
-     "-Qt widgets,\n"
-     "-JSON serialization, \n"
-     "-Qml technology [not yet implemented],\n"
-     "-Data bases [not yet implemented],\n"
-     "-Qt localization [not yet implemented],\n"
-     "-Interprocess communication [not yet implemented],\n"
-     "-TCP/IP communication [not yet implemented],\n"
-     "-Unit testing [not yet implemented]"
-                });
+     "The application also allows you to write a dictionary to the database.</p><br>"
+
+     "<b><font size=\"3\" color=#0A3051>In particular this example project show possession of such "
+     "skills as:</b>"
+     "<ul>"
+     "<li>%1Modern c++"
+     "<li>%1Multithreading"
+     "<li>%1Design patterns"
+     "<li>%1Basic algoritms & Data structures"
+     "<li>%1Smart pointers"
+     "<li>%1Qt widgets"
+     "<li>%1JSON serialization"
+     "<li>%1Qml technology %2[not yet implemented]"
+     "<li>%1Data bases %2[not yet implemented]"
+     "<li>%1Qt localization %2[not yet implemented],"
+     "<li>%1Interprocess communication %2[not yet implemented]"
+     "<li>%1TCP/IP communication %2[not yet implemented]"
+     "<li>%1Unit testing %2[not yet implemented]</ul>"
+                }).arg(itemsFont).
+            arg(notImplementedFont);
 }
 
 QString CApplicationInfo::getAppVersion()
 {
-    return PROGRAM_VERSION;
+    return tr("<b><font size=\"3\" color=#00512E>%1 </b>"
+                ).arg(PROGRAM_VERSION);
 }
 
 QString CApplicationInfo::getContacts()
 {
-    return tr("Abrosimov Petr \n"
-              "Software Engineer \n"
-              "Email: petruha_1@ngs.ru");
+    return tr("<b><font size=\"3\" color=#244A8C> Abrosimov Petr</b><br>"
+              "<b><font size=\"3\" color=#500B8C> Software Engineer</b><br>"
+              "<b><font size=\"3\" color=#00512E> Email:</b>"
+              "<a href=\"mailto:petruha_1@ngs.ru\"> <cite>petruha_1@ngs.ru</cite></a>  <br>");
 }
 
 QPixmap CApplicationInfo::getmyPhoto()
