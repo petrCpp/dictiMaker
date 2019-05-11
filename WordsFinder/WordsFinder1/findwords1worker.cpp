@@ -59,7 +59,7 @@ void FindWords1Worker::scanFile()
             {
                 break;
             }
-            pos += PORC_BYTE_COUNT-50;
+            pos += PORC_BYTE_COUNT-OFFSET_SIMBOLS;
 
             percentage = (100.0f *pos)/static_cast<float>(fileSize);
             emit percenteges(percentage);
@@ -93,10 +93,11 @@ bool FindWords1Worker::scanFilePortion(QFile &file, int64_t startPos,
     QString str(arr);
 
     const QRegExp word_expr(QString("\\b[a-zа-я]{2,32}\\b"), Qt::CaseInsensitive);
-    const QRegExp sep_expr(QString("[^a-z^а-я]"), Qt::CaseInsensitive);
+    const QRegExp sep_expr(QString("[^a-z^а-я^\\-^\\r^\\n]"), Qt::CaseInsensitive);// [^\\n]?
     int64_t cnt=0, cnt_end;
     int32_t dummy = 0;
     QString word;
+    QString lastWord;
     while(cnt<str.size())
     {
         cnt = str.indexOf(word_expr, cnt);
@@ -106,10 +107,18 @@ bool FindWords1Worker::scanFilePortion(QFile &file, int64_t startPos,
         word = str.mid(cnt, cnt_end-cnt);
         if(cnt_end < 0) break;
         cnt = cnt_end;
-        if(!dictionary.contains(word)) { // Слово отсутствует в словаре
-            dictionary.insert(word, dummy); // Добавляем слово, если оно отсутствует в
-            // словаре
+        word = remove0D0A(word);
+        if(!dictionary.contains(word)) // Слово отсутствует в словаре
+        {
+             dictionary.insert(word, dummy); // Добавляем слово, если оно отсутствует в
+                                            // словаре
+             lastWord = word;
         }
+    }
+
+    if(lastWord == word) // Если мы добавили последнее слово в словарь
+    {
+        dictionary.remove(word);
     }
 
     if(arr.size() < porcByteCount)
@@ -121,3 +130,24 @@ bool FindWords1Worker::scanFilePortion(QFile &file, int64_t startPos,
         return false;
     }
 }
+
+QString FindWords1Worker::remove0D0A(const QString &str)
+{
+    QString res = str;
+    while(1)
+    {
+        int index = res.indexOf(QRegExp("[\\n\\r\\t\\v]"));
+        if(index > 0)
+        {
+            res.remove(index, 1);
+        }
+        else
+        {
+            break;
+        }
+    }
+    return res;
+}
+
+
+

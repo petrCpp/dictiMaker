@@ -29,11 +29,13 @@ private slots:
     bool scanFilePortion(QFile &file, int64_t startPos, int64_t porcByteCount, QMap<QString, uint16_t> &dictionary);
 
 protected:
+    const uint32_t OFFSET_SIMBOLS = 70;
     const uint32_t PORC_BYTE_COUNT = 100000;
     QMap<QString, uint16_t> mDictionary;
     QQueue<QString> tasksFiles;
     bool mScaningFileState {false};
     bool mTerminate {false};
+    static QString remove0D0A(const QString &str);
 };
 
 

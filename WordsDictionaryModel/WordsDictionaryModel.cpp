@@ -27,6 +27,11 @@ void WordsDictionaryModel::buildModel()
     QMap<QString, uint16_t>::const_iterator it;
     this->blockSignals(true); // To accelerating redraw views
     this->clear();
+    QStandardItem *item = new QStandardItem(QString("Word"));
+    this->setHorizontalHeaderItem(0, item);
+    item = new QStandardItem(QString("Speach Part"));
+    this->setHorizontalHeaderItem(1, item);
+
     this->setColumnCount(2);
     this->setRowCount(mDict.size());
     int i = 0;
