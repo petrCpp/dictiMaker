@@ -29,7 +29,7 @@ DEFINES += PROGRAM_VERSION=\\\"$${VERSION}\\\"
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
+        Gui/mainwindow.cpp \
     Gui/GuiInterface/guiinterface.cpp \
     Gui/GuiInterface/guicommandsinterface.cpp \
     WordsFinder/abstractwordsfinder.cpp \
@@ -45,10 +45,12 @@ SOURCES += \
     WordsFinder/WordsFinder1/findwords1worker.cpp \
     CBasicErrorType.cpp \
     AppInfo/capplicationinfo.cpp \
-    Gui/aboutwindow.cpp
+    Gui/aboutwindow.cpp \
+    Gui/Delegates/SpeachPartsDelegate.cpp \
+    Gui/Delegates/speachpartswidget.cpp
 
 HEADERS += \
-        mainwindow.h \
+        Gui/mainwindow.h \
     Gui/GuiInterface/guiinterface.h \
     Gui/GuiInterface/guicommandsinterface.h \
     WordsFinder/abstractwordsfinder.h \
@@ -65,11 +67,14 @@ HEADERS += \
     WordsFinder/cfindererrortype.h \
     WordsFinder/WordsFinder1/findwords1worker.h \
     AppInfo/capplicationinfo.h \
-    Gui/aboutwindow.h
+    Gui/aboutwindow.h \
+    Gui/Delegates/SpeachPartsDelegate.h \
+    Gui/Delegates/speachpartswidget.h
 
 FORMS += \
-        mainwindow.ui \
-    Gui/aboutwindow.ui
+        Gui/mainwindow.ui \
+    Gui/aboutwindow.ui \
+    Gui/Delegates/speachpartswidget.ui
 
 RESOURCES += \
     resources.qrc

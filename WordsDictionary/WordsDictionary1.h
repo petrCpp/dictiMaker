@@ -30,7 +30,9 @@ public:
     void closeSource() override;
     QMap<QString, QList<ESpeechPart>> words() override;
     void setWords(const QMap<QString, QList<ESpeechPart>> &words) override;
+    QMap<ESpeechPart, QString> getSpeachPartsNames() const override;
 protected:
+    static const QMap<ESpeechPart, QString> mSpPatrtsNames;
     QString mFileFormatVersion = "1434Faad12487331";
     QString mDictName;
     QString mDictLanguage;

@@ -5,21 +5,24 @@
 #include <QMap>
 #include <QString>
 #include <WordsDictionary/abstractwordsdictionary.h>
+#include <WordsDictionary/abstractwordsdictionary.h>
 
 class WordsDictionaryModel : public QStandardItemModel
 {
     Q_OBJECT
 public:
     WordsDictionaryModel(QObject *parent = nullptr);
+    void setWordDictionary(AbstractWordsDictionary *dict);
     ~WordsDictionaryModel() override
     {
         ;
     }
-    void addDict(const QMap<QString, QList<ESpeechPart> > &dict);
+    void addWords(const QMap<QString, QList<ESpeechPart> > &words);
 
 
 protected:
-    QMap<QString, uint16_t> mDict;
+    AbstractWordsDictionary *mDict {nullptr};
+    QMap<QString, QList<ESpeechPart>> mWords;
 
 private:
     void buildModel();

@@ -18,12 +18,15 @@ AppController::AppController(EOsType osType, QObject *parent) :
     mGui->setDictionaryModel(mModel);
     mWordsFinder->setWordsFinderEvents(this);
     mGui->renderTotalWordsCount(mWordsDict->words().size());
-
+    mModel->setWordDictionary(mWordsDict.get());
 
     mGui->setAppDescription(appInfo->getAppDescription());
+    mGui->setAppName(appInfo->getApplicationName());
     mGui->setAppVersion(appInfo->getAppVersion());
+    mGui->setAppBuildDate(appInfo->getAppBuildDate());
     mGui->setContacts(appInfo->getContacts());
     mGui->setMyPhoto(appInfo->getmyPhoto());
+    mGui->setDictionaryGeometry();
 }
 
 
@@ -76,7 +79,8 @@ void AppController::loadDictionary(EWordDictSource source)
         mGui->renderLanguage(mWordsDict->getDictLanguage());
         mGui->renderTotalWordsCount(mWordsDict->words().size());
         mModel->clear();
-        mModel->addDict(mWordsDict->words());
+        mModel->addWords(mWordsDict->words());
+        mGui->setDictionaryGeometry();
     }
 }
 
@@ -99,7 +103,8 @@ void AppController::completed(EWordsFinderResult result)
     if(result == EWordsFinderResult::succes)
     {
         mWordsDict->appendWords(mWordsFinder->getFoundWords());
-        mModel->addDict(mWordsDict->words());
+        mModel->addWords(mWordsDict->words());
+        mGui->setDictionaryGeometry();
     }
     mGui->renderTotalWordsCount(mWordsDict->words().size());
 }

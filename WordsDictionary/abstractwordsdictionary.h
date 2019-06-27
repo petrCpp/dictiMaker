@@ -20,8 +20,10 @@ enum class ESpeechPart: uint8_t
     interjection,
     nonWord,        // is not word
     foreignWord,
-    unknown
+    unknown,
+    partsCount
 };
+
 
 
 class AbstractWordsDictionary
@@ -42,6 +44,7 @@ public:
     virtual void closeSource() = 0;
     virtual QMap<QString, QList<ESpeechPart>> words() = 0;
     virtual void setWords(const QMap<QString, QList<ESpeechPart>> &words) = 0;
+    virtual QMap<ESpeechPart, QString> getSpeachPartsNames() const =0 ;
     virtual ~AbstractWordsDictionary() = 0;
 };
 

@@ -8,6 +8,12 @@ AboutWindow::AboutWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
+AboutWindow::~AboutWindow()
+{
+    delete ui;
+}
+
+
 void AboutWindow::setAppDescription(const QString &descr)
 {
     //mDescr = descr;
@@ -16,10 +22,24 @@ void AboutWindow::setAppDescription(const QString &descr)
 
 void AboutWindow::setAppVersion(const QString &version)
 {
-    //mVersion = version;
-
-    ui->progVersionLbl->setText(QString("<b>%1</b> <i></i>").arg(version));
+    mVersion = version;
+    showVersionDate();
 }
+
+void AboutWindow::setAppBuildDate(const QString &buildDate)
+{
+    mBuildDate = buildDate;
+    showVersionDate();
+}
+
+
+void AboutWindow::showVersionDate()
+{
+    ui->progVersionLbl->setText(QString("<b>%1 built %2</b> <i></i>").
+                                arg(mVersion).
+                                arg(mBuildDate));
+}
+
 
 void AboutWindow::setContacts(const QString &contacts)
 {

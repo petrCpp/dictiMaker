@@ -5,6 +5,11 @@ CApplicationInfo::CApplicationInfo(QObject *parent) : QObject(parent)
 
 }
 
+QString CApplicationInfo::getApplicationName()
+{
+    return tr("Dictionary Maker");
+}
+
 QString CApplicationInfo::getAppDescription()
 {
     const QString itemsFont = "<font size=\"3\" color=#0B890B>";
@@ -40,7 +45,12 @@ QString CApplicationInfo::getAppDescription()
 QString CApplicationInfo::getAppVersion()
 {
     return tr("<b><font size=\"3\" color=#00512E>%1 </b>"
-                ).arg(PROGRAM_VERSION);
+              ).arg(PROGRAM_VERSION);
+}
+
+QString CApplicationInfo::getAppBuildDate()
+{
+    return QString(__DATE__);
 }
 
 QString CApplicationInfo::getContacts()

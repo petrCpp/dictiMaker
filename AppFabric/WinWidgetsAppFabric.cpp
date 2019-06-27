@@ -1,6 +1,6 @@
 #include "WinWidgetsAppFabric.h"
 #include <Gui/GuiInterface/guiinterface.h>
-#include <mainwindow.h>
+#include <Gui/mainwindow.h>
 #include <WordsDictionary/WordsDictionary1.h>
 #include <WordsFinder/WordsFinder1/wordsfinder1.h>
 

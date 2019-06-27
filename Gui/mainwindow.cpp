@@ -3,16 +3,60 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <Gui/GuiInterface/guicommandsinterface.h>
+#include <QMessageBox>
+#include <QTableView>
+#include <QItemDelegate>
+
+
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    mDelegate(new SpeachPartsDelegate(this)),
+    mTableColProperties
+    ({
+    {120},
+    {40},
+    {60},
+    {100},
+    {60},
+    {60},
+    {40},
+    {60},
+    {70},
+    {75},
+    {50},
+    {75},
+    {60},
+    {80},
+    {70},
+    })
 {
     ui->setupUi(this);
+
+    //QTableView *view = new QTableView(this);
+    //QItemDelegate
+
     redrawPercentage(100.0);
 
     this->show();
 
+    connect(ui->actionOpenDBDictionary,
+            &QAction::triggered, this, [this]()
+    {
+        QMessageBox box;
+        box.setText(tr("It option is not yet implemented"));
+        box.exec();
+    }, Qt::DirectConnection);
+
+    connect(ui->actionSave_dictionary_DB,
+            &QAction::triggered, this, [this]()
+    {
+        QMessageBox box;
+        box.setText(tr("It option is not yet implemented"));
+        box.exec();
+    }, Qt::DirectConnection);
 
     connect(ui->actionOpen_text_file_for_find_new_words,
             SIGNAL(triggered(bool)), this, SLOT(onOpenTextFile()),
@@ -90,10 +134,12 @@ void MainWindow::onAbout()
         mAbout.reset(new AboutWindow);
         mAbout->setAppDescription(mDescr);
         mAbout->setAppVersion(mVersion);
+        mAbout->setAppBuildDate(mBuildDate);
         mAbout->setContacts(mContacts);
         mAbout->setMyPhoto(mMyPhoto);
     }
     mAbout->show();
+
 
 
 }
@@ -106,6 +152,20 @@ void MainWindow::setGuiCommandsInterface(GuiCommandsInterface *cmdInterf)
 void MainWindow::setDictionaryModel(QAbstractItemModel *model)
 {
     ui->tableView->setModel(model);
+    //std::unique_ptr<QAbstractItemDelegate> deleg(ui->tableView->
+    //                                             itemDelegate());
+    //ui->tableView->setItemDelegate(mDelegate);
+}
+
+void MainWindow::setDictionaryGeometry()
+{
+    //ui->tableView->setColumnWidth(1, 500);
+
+    for(int i=0; i<mTableColProperties.size(); i++)
+    {
+        ui->tableView->setColumnWidth(i, mTableColProperties[i].width);
+        //ui->tableView->setRowHeight(i, 60);
+    }
 }
 
 void MainWindow::renderTotalWordsCount(int totalWordsCount)
@@ -136,6 +196,11 @@ void MainWindow::redrawPercentage(float perc)
         ui->progressBar->setVisible(true);
         ui->progressBar->setValue(perc);
     }
+}
+
+void MainWindow::setAppName(const QString &appName)
+{
+    this->setWindowTitle(appName);
 }
 
 void MainWindow::setMyPhoto(const QPixmap &photo)

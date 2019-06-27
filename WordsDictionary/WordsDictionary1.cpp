@@ -3,6 +3,25 @@
 #include <QFile>
 #include <QLatin1String>
 
+const QMap<ESpeechPart, QString> WordsDictionary1::mSpPatrtsNames
+{
+    {ESpeechPart::adjective, QObject::tr("Adjective")},
+    {ESpeechPart::adverb, QObject::tr("Adverb")},
+    {ESpeechPart::conjunction, QObject::tr("Conjunction")},
+    {ESpeechPart::foreignWord, QObject::tr("ForeignWord")},
+    {ESpeechPart::interjection, QObject::tr("Interjection")},
+    {ESpeechPart::nonWord, QObject::tr("Not word")},
+    {ESpeechPart::noun, QObject::tr("Noun")},
+    {ESpeechPart::numeral, QObject::tr("Numeral")},
+    {ESpeechPart::particle, QObject::tr("Particle")},
+    {ESpeechPart::preposition, QObject::tr("Preposition")},
+    {ESpeechPart::pronoun, QObject::tr("Pronoun")},
+    {ESpeechPart::shortAdjective, QObject::tr("Short Adjective")},
+    {ESpeechPart::unknown, QObject::tr("Unknown")},
+    {ESpeechPart::verb, QObject::tr("Verb")},
+};
+
+
 WordsDictionary1::WordsDictionary1()
 {
 
@@ -167,6 +186,11 @@ void WordsDictionary1::setWords(const QMap<QString, QList<ESpeechPart> > &words)
     Q_UNUSED(words);
 }
 
+QMap<ESpeechPart, QString> WordsDictionary1::getSpeachPartsNames() const
+{
+    return mSpPatrtsNames;
+}
+
 QJsonValue  WordsDictionary1::speachPartToJsonValue(ESpeechPart speachPart)
 {
     switch(speachPart)
@@ -185,6 +209,7 @@ QJsonValue  WordsDictionary1::speachPartToJsonValue(ESpeechPart speachPart)
     case ESpeechPart::nonWord: return QJsonValue("nonWord");
     case ESpeechPart::foreignWord: return QJsonValue("foreignWord");
     case ESpeechPart::unknown: return QJsonValue("unknown");
+    case ESpeechPart::partsCount: return QJsonValue("unknown");
     }
     return QJsonValue("unknown");
 }

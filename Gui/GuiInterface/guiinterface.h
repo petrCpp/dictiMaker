@@ -12,6 +12,7 @@ class GuiInterface
 public:
     virtual void setGuiCommandsInterface(GuiCommandsInterface *cmdInterf) = 0;
     virtual void setDictionaryModel(QAbstractItemModel *model) = 0;
+    virtual void setDictionaryGeometry() = 0;
     virtual void renderTotalWordsCount(int totalWordsCount) = 0;
     virtual void renderNewFoundWordsCount(int newWordsCount) = 0;
     virtual void renderTotalWords(const QStringList &words) = 0;
@@ -22,7 +23,9 @@ public:
     virtual void showErrorMessage(const CBasicErrorType &err) = 0;
     virtual void redrawPercentage(float perc) = 0;
     virtual void setAppDescription(const QString &descr) = 0;
+    virtual void setAppName(const QString &appName) = 0;
     virtual void setAppVersion(const QString &version) = 0;
+    virtual void setAppBuildDate(const QString &buildDate) = 0;
     virtual void setContacts(const QString &contacts) = 0;
     virtual void setMyPhoto(const QPixmap &photo) = 0;
     virtual ~GuiInterface() = 0;

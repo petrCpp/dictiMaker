@@ -10,8 +10,10 @@ class CApplicationInfo : public QObject
     Q_OBJECT
 public:
     explicit CApplicationInfo(QObject *parent = nullptr);
+    QString getApplicationName();
     QString getAppDescription();
     QString getAppVersion();
+    QString getAppBuildDate();
     QString getContacts();
     QPixmap getmyPhoto();
 signals:
